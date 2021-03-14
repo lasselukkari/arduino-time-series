@@ -40,35 +40,33 @@ function App() {
         <LineChart data={data} >
           <XAxis
             dataKey="timestamp"
-            interval="preserveStartEnd"
             type={"number"}
             domain={['dataMin', 'dataMax']}
             tickCount={3}
             tickFormatter={(ts) => new Date(ts).toLocaleDateString()}
-            strokeWidth={2}
           />
-          <YAxis yAxisId="left" strokeWidth={2} />
-          <YAxis yAxisId="right" orientation="right" strokeWidth={2} />
+          <YAxis
+            yAxisId="left"
+          />
+          <YAxis
+            yAxisId="right"
+            orientation="right"
+          />
           <Tooltip
             formatter={(value, name) => `${value.toFixed(2)} ${units[name]}`}
             labelFormatter={(ts) => new Date(ts).toLocaleString()}
-            name="foo"
           />
           <Line
             yAxisId={"left"}
-            dot={false}
             type="monotone"
             dataKey={"Temperature"}
             stroke={"#EC9A29"}
-            strokeWidth={2}
           />
           <Line
             yAxisId={"right"}
-            dot={false}
             type="monotone"
             dataKey={"Humidity"}
             stroke={"#A8201A"}
-            strokeWidth={2}
           />
         </LineChart>
       </ResponsiveContainer>
