@@ -50,7 +50,7 @@ void storeMeasurement(uint32_t epoch, float temperature, float humidity) {
 
 void setup() {
   Serial.begin(115200);
-  SPIFFS.begin(); // SPIFFS file system is used instead of SD card but API is almost the same.
+  SPIFFS.begin(); // SPIFFS file system is used instead of SD card but the API is almost the same.
 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
