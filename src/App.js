@@ -67,7 +67,6 @@ function App() {
             dataKey={"Temperature"}
             stroke={"#EC9A29"}
             strokeWidth={2}
-            label="Unique Visitors"
           />
           <Line
             yAxisId={"right"}
@@ -76,7 +75,6 @@ function App() {
             dataKey={"Humidity"}
             stroke={"#A8201A"}
             strokeWidth={2}
-            label="Unique Visitors"
           />
         </LineChart>
       </ResponsiveContainer>
