@@ -32,7 +32,6 @@ void getData(Request &req, Response &res) {
   }
 }
 
-// SPIFFS file system is used instead of SD card. The api is the same but we need to do less setup.
 void storeMeasurement(uint32_t epoch, float temperature, float humidity) {
   File file = SPIFFS.open(DATA_FILE, "a");
   if (!file) {
@@ -49,11 +48,9 @@ void storeMeasurement(uint32_t epoch, float temperature, float humidity) {
   Serial.println("data written");
 }
 
-
-
 void setup() {
   Serial.begin(115200);
-  SPIFFS.begin();
+  SPIFFS.begin(); // SPIFFS file system is used instead of SD card but API is almost the same.
 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
@@ -69,7 +66,7 @@ void setup() {
   timeClient.begin();
   timeClient.update();
 
-  // create a new faked measurement when the device is resetted
+  // Create a new faked measurement when the device is resetted.
   storeMeasurement(timeClient.getEpochTime(), 20.5, 58.7);
 }
 
