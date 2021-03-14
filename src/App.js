@@ -27,7 +27,7 @@ function App() {
       // Our data format is [timestamp][tempreature][humidity][timestamp][tempreature][humidity][timestamp]...
       // The timestamp is a 32 bit (4 bytes) integer and temprature and humidity are 32 bit (4 bytes) floats.
       // We first split the whole data to 12 byte chunks of [timestamp][tempreature][humidity].
-      // The we split that to three 4 bit chunks and convert the binary data to numbers.
+      // Then we split that to three 4 bit chunks and convert the binary data to numbers.
       const chunks = chunk(binaryData, 12).map((c) => chunk(c, 4)).map((logLine) => ({
         timestamp: new DataView(logLine[0]).getInt32(0, true) * 1000,
         Temperature: new DataView(logLine[1]).getFloat32(0, true),
