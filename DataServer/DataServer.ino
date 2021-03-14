@@ -42,10 +42,7 @@ void storeMeasurement(uint32_t epoch, float temperature, float humidity) {
   file.write((byte *)&epoch, 4);
   file.write((byte *)&temperature, 4);
   file.write((byte *)&humidity, 4);
-
   file.close();
-
-  Serial.println("data written");
 }
 
 void setup() {
