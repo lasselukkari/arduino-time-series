@@ -15,7 +15,7 @@
 #define DATA_FILE "/data.bin"
 
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP);
+NTPClient ntp(ntpUDP);
 WiFiServer server(80);
 Application app;
 
@@ -32,14 +32,14 @@ void getData(Request &req, Response &res) {
   }
 }
 
-void storeMeasurement(uint32_t epoch, float temperature, float humidity) {
+void storeMeasurements(uint32_t timestamp, float temperature, float humidity) {
   File file = SPIFFS.open(DATA_FILE, "a");
   if (!file) {
     Serial.println("Failed to open file for appending");
     return;
   }
 
-  file.write((byte *)&epoch, 4);
+  file.write((byte *)&timestamp, 4);
   file.write((byte *)&temperature, 4);
   file.write((byte *)&humidity, 4);
   file.close();
@@ -60,11 +60,11 @@ void setup() {
   app.get("/api/data", &getData);
   server.begin();
 
-  timeClient.begin();
-  timeClient.update();
+  ntp.begin();
+  ntp.update();
 
   // Create a new faked measurement when the device is resetted.
-  storeMeasurement(timeClient.getEpochTime(), 20.5, 58.7);
+  storeMeasurements(ntp.getEpochTime(), 20.5, 58.7);
 }
 
 void loop() {

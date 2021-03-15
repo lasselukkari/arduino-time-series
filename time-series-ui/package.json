@@ -36,5 +36,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://your.arduino.ip"
+  "proxy": "http://192.168.1.117/"
 }

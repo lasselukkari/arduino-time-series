@@ -16,13 +16,12 @@ function App() {
       const view = new DataView(buffer);
 
       // Our data format is [timestamp][tempreature][humidity][timestamp][tempreature][humidity][timestamp]...
-      // The timestamp is a 32 bit (4 bytes) integer and temprature and humidity are 32 bit (4 bytes) floats.
+      // The timestamp is a 32 bit (4 bytes) unsigned integer and temprature and humidity are 32 bit (4 bytes) floats.
       // We loop over the data in 12 byte steps and convert the binary data to numbers.
       const data = [];
-
       for (let i = 0; i < buffer.byteLength; i += 12) {
         data.push({
-          timestamp: view.getInt32(i, true) * 1000,
+          timestamp: view.getUint32(i, true) * 1000,
           Temperature: view.getFloat32(i + 4, true),
           Humidity: view.getFloat32(i + 8, true)
         })
